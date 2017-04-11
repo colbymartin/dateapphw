@@ -15,8 +15,7 @@ let profiles = [
 
 
 window.addEventListener('load', function () {
-    let count = 0;
-    function NewPerson() {
+    function NewPerson(count) {
         let parent = document.querySelector('main ul');
     
         let el = document.createElement('li');
@@ -29,12 +28,24 @@ window.addEventListener('load', function () {
 
         let yobutton = document.createElement('button');
         yobutton.textContent = 'YO';
-        yobutton.addEventListener('click', NewPerson);
+        yobutton.addEventListener('click', function () {
+            console.log("Wassup " + profiles[count].name);
+            NewPerson(count + 1);
+            pic.classList.add('opaque');
+            nobutton.disabled = true;
+            yobutton.disabled = true;
+        })
         
 
         let nobutton = document.createElement('button');
         nobutton.textContent = 'NO';
-        nobutton.addEventListener('click', NewPerson);
+        nobutton.addEventListener('click', function () {
+            NewPerson(count + 1);
+            console.log("I don't want no scrub");
+            pic.classList.add('opaque');
+            nobutton.disabled = true;
+            yobutton.disabled = true;
+        })
 
         el.appendChild(title);
         el.appendChild(pic);
@@ -42,9 +53,8 @@ window.addEventListener('load', function () {
         el.appendChild(nobutton);
         parent.appendChild(el);
 
-        count++;
     }
-    NewPerson();
+    NewPerson(0);
     });
 
 
